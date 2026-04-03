@@ -14,37 +14,52 @@ const NAV_LINKS = [
 ];
 
 const STACK = [
-  { name: "Java", icon: "☕", category: "Core" },
-  { name: "Spring Boot", icon: "🍃", category: "Framework" },
-  { name: "JPA / Hibernate", icon: "🗄️", category: "ORM" },
-  { name: "MongoDB", icon: "🍃", category: "NoSQL" },
-  { name: "JDBC", icon: "🔌", category: "Core" },
-  { name: "APIs REST", icon: "🌐", category: "Backend" },
-  { name: "SQL / NoSQL", icon: "💾", category: "Database" },
-  { name: "POO", icon: "🧱", category: "Paradigma" },
-  { name: "Collections & Generics", icon: "📦", category: "Java" },
-  { name: "Lambda & Stream API", icon: "⚡", category: "Java" },
-  { name: "Tratamento de Exceções", icon: "🛡️", category: "Java" },
-  { name: "Git & GitHub", icon: "🔀", category: "Versionamento" },
-  { name: "Spring Security", icon: "🔐", category: "Segurança" },
-  { name: "JWT", icon: "🪙", category: "Auth" },
-  { name: "PostgreSQL", icon: "🐘", category: "Database" },
-  { name: "Swagger", icon: "📋", category: "Docs" },
-  { name: "Docker", icon: "🐳", category: "DevOps" },
+  { name: "Java", icon: "☕", category: "Core", main: true },
+  { name: "Spring Boot", icon: "🍃", category: "Framework", main: true },
+  { name: "Spring Security", icon: "🔐", category: "Segurança", main: true },
+  { name: "JWT", icon: "🪙", category: "Auth", main: true },
+  { name: "PostgreSQL", icon: "🐘", category: "Database", main: true },
+  { name: "JPA / Hibernate", icon: "🗄️", category: "ORM", main: false },
+  { name: "MongoDB", icon: "🍃", category: "NoSQL", main: false },
+  { name: "APIs REST", icon: "🌐", category: "Backend", main: false },
+  { name: "Swagger", icon: "📋", category: "Docs", main: false },
+  { name: "POO", icon: "🧱", category: "Paradigma", main: false },
+  { name: "Collections & Generics", icon: "📦", category: "Java", main: false },
+  { name: "Lambda & Stream API", icon: "⚡", category: "Java", main: false },
+  { name: "Tratamento de Exceções", icon: "🛡️", category: "Java", main: false },
+  { name: "JDBC", icon: "🔌", category: "Core", main: false },
+  { name: "Git & GitHub", icon: "🔀", category: "Versionamento", main: false },
+  { name: "SQL / NoSQL", icon: "💾", category: "Database", main: false },
 ];
 
 const PROJECTS = [
   {
+    title: "FinanceSync API",
+    desc: "API REST para controle financeiro pessoal com autenticação JWT, categorização de transações, validação com Bean Validation, tratamento de exceções via GlobalExceptionHandler e documentação automática via Swagger/OpenAPI.",
+    tags: ["Java", "Spring Boot", "Spring Security", "JWT", "PostgreSQL", "Bean Validation", "Swagger"],
+    link: "https://github.com/EndriwEngSoft/financesync-api",
+    icon: "💰",
+    color: "#fbbf24",
+  },
+  {
+    title: "TaskFlow API",
+    desc: "API REST para gerenciamento de tarefas com autenticação stateless via JWT, controle de acesso por perfil de usuário, tratamento global de exceções com GlobalExceptionHandler e documentação automática via Swagger/OpenAPI.",
+    tags: ["Java", "Spring Boot", "Spring Security", "JWT", "PostgreSQL", "Swagger"],
+    link: "https://github.com/EndriwEngSoft/taskflow-api",
+    icon: "✅",
+    color: "#38bdf8",
+  },
+  {
     title: "API REST com Spring Boot + JPA",
-    desc: "API REST com arquitetura em camadas, CRUD completo, tratamento de exceções e persistência com JPA/Hibernate.",
-    tags: ["Java", "Spring Boot", "JPA", "Hibernate", "REST"],
+    desc: "API REST com arquitetura em camadas, CRUD completo, mapeamento objeto-relacional com JPA/Hibernate e persistência com PostgreSQL.",
+    tags: ["Java", "Spring Boot", "JPA", "Hibernate", "PostgreSQL"],
     link: "https://github.com/EndriwEngSoft/workshop-springboot4-jpa",
     icon: "🗄️",
     color: "#4ade80",
   },
   {
     title: "API REST com MongoDB",
-    desc: "API REST com banco NoSQL aplicando modelagem de dados, relacionamento entre documentos e boas práticas de design.",
+    desc: "API REST com banco NoSQL aplicando modelagem de documentos, relacionamento entre coleções e boas práticas de design com Spring Boot.",
     tags: ["Java", "Spring Boot", "MongoDB", "NoSQL"],
     link: "https://github.com/EndriwEngSoft/workshop-springboot4-mongodb",
     icon: "🍃",
@@ -52,27 +67,11 @@ const PROJECTS = [
   },
   {
     title: "Sistema de Xadrez em Java",
-    desc: "Aplicação de xadrez totalmente em Java, explorando encapsulamento, herança, polimorfismo e modelagem de domínio.",
+    desc: "Sistema de xadrez totalmente em Java explorando encapsulamento, herança, polimorfismo e modelagem de domínio orientada a objetos.",
     tags: ["Java", "POO", "Encapsulamento", "Herança", "Polimorfismo"],
     link: "https://github.com/EndriwEngSoft/chess-system",
     icon: "♟️",
     color: "#a78bfa",
-  },
-  {
-    title: "TaskFlow API",
-    desc: "API REST de gerenciamento de tarefas com autenticação JWT e controle de acesso por usuário.",
-    tags: ["Java", "Spring Boot", "Spring Security", "JWT", "PostgreSQL", "Swagger"],
-    link: "https://github.com/EndriwEngSoft/taskflow-api",
-    icon: "✅",
-    color: "#38bdf8",
-  },
-  {
-    title: "FinanceSync API",
-    desc: "API REST de gerenciamento financeiro pessoal com JWT, controle de contas bancárias, categorias e transações.",
-    tags: ["Java", "Spring Boot", "Spring Security", "JWT", "PostgreSQL", "Swagger"],
-    link: "https://github.com/EndriwEngSoft/financesync-api",
-    icon: "💰",
-    color: "#fbbf24",
   },
 ];
 
@@ -120,11 +119,29 @@ export default function Portfolio() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const sections = ["sobre", "stack", "projetos", "experiencia", "certificacao", "contato"];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        });
+      },
+      { threshold: 0.3 }
+    );
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
   }, []);
 
   const copyEmail = () => {
@@ -259,9 +276,19 @@ export default function Portfolio() {
           </span>
 
           <div className="hide-mobile" style={{ display: "flex", alignItems: "center", gap: 4 }}>
-            {NAV_LINKS.map(l => (
-              <button key={l.label} className="nav-link" onClick={() => scrollTo(l.href)}>{l.label}</button>
-            ))}
+            {NAV_LINKS.map(l => {
+              const sectionId = l.href.replace("#", "");
+              const isActive = activeSection === sectionId;
+              return (
+                <button key={l.label} className="nav-link" onClick={() => scrollTo(l.href)} style={{
+                  color: isActive ? t.accent : t.textMuted,
+                  background: isActive ? t.accentBg : "transparent",
+                }}>
+                  {l.label}
+                  {isActive && <span style={{ display: "block", height: 2, background: t.accent, borderRadius: 2, marginTop: 2 }} />}
+                </button>
+              );
+            })}
           </div>
 
           <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -325,8 +352,22 @@ export default function Portfolio() {
                   </a>
                 </div>
 
-                <div style={{ display: "flex", alignItems: "center", gap: 8, color: t.textMuted, fontSize: 14 }}>
-                  <span>📍</span> Rio Grande do Sul, Brasil
+                <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 16, marginBottom: 8 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8, color: t.textMuted, fontSize: 14 }}>
+                    <span>📍</span> Rio Grande do Sul, Brasil
+                  </div>
+                  <div style={{ display: "flex", gap: 16 }}>
+                    {[
+                      { label: "Projetos", value: "5+" },
+                      { label: "Certificações", value: "2" },
+                      { label: "Foco", value: "Backend" },
+                    ].map(stat => (
+                      <div key={stat.label} style={{ textAlign: "center" }}>
+                        <div style={{ fontWeight: 700, fontSize: 18, color: t.accent, fontFamily: "'DM Mono', monospace" }}>{stat.value}</div>
+                        <div style={{ fontSize: 11, color: t.textFaint, textTransform: "uppercase", letterSpacing: "0.08em" }}>{stat.label}</div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </AnimatedSection>
@@ -394,7 +435,7 @@ export default function Portfolio() {
             </div>
             <div>
               <p style={{ color: t.textMuted, lineHeight: 1.8, fontSize: 16, marginBottom: 28 }}>
-                Atualmente sigo um roadmap contínuo focado em <strong style={{ color: t.accent }}>Java, Docker, cloud e backend avançado</strong>, buscando minha primeira oportunidade como desenvolvedor para construir soluções eficientes, escaláveis e bem estruturadas.
+                Atualmente sigo um roadmap contínuo focado em <strong style={{ color: t.accent }}>Java, boas práticas de backend, testes automatizados e evolução contínua rumo ao mercado profissional</strong>, buscando minha primeira oportunidade como desenvolvedor para construir soluções eficientes, escaláveis e bem estruturadas.
               </p>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                 {DIFERENCIAIS.map(d => (
@@ -420,16 +461,39 @@ export default function Portfolio() {
             <div className="section-label"><span>//</span> tecnologias</div>
             <h2 style={{ fontSize: "clamp(1.8rem, 3vw, 2.6rem)", fontWeight: 700, marginBottom: 16 }}>Stack & Tecnologias</h2>
             <p style={{ color: t.textMuted, fontSize: 16, marginBottom: 48 }}>Ferramentas e tecnologias que utilizo no dia a dia</p>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))", gap: 16 }}>
-              {STACK.map((s, i) => (
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 14 }}>
+              {/* Principais */}
+              <div style={{ gridColumn: "1 / -1", display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(160px, 1fr))", gap: 12, marginBottom: 8 }}>
+                {STACK.filter(s => s.main).map((s, i) => (
+                  <div key={s.name} style={{
+                    padding: "20px 16px", cursor: "default", borderRadius: 16,
+                    background: `linear-gradient(135deg, ${t.bgCard}, ${t.accentBg})`,
+                    border: `1.5px solid ${t.accentBorder}`,
+                    boxShadow: `0 0 16px rgba(74,222,128,0.08)`,
+                    position: "relative", overflow: "hidden",
+                  }}>
+                    <div style={{
+                      position: "absolute", top: 8, right: 8,
+                      background: t.accent, color: "#0a0a0f",
+                      fontSize: 9, fontWeight: 700, letterSpacing: "0.06em",
+                      padding: "2px 7px", borderRadius: 4,
+                      fontFamily: "'DM Mono', monospace", textTransform: "uppercase",
+                    }}>Principal</div>
+                    <div style={{ fontSize: 28, marginBottom: 10 }}>{s.icon}</div>
+                    <div style={{ fontWeight: 700, fontSize: 14, marginBottom: 4 }}>{s.name}</div>
+                    <div style={{ fontSize: 11, color: t.accent, fontFamily: "'DM Mono', monospace" }}>{s.category}</div>
+                  </div>
+                ))}
+              </div>
+              {/* Secundárias */}
+              {STACK.filter(s => !s.main).map((s, i) => (
                 <div key={s.name} className="card" style={{
-                  padding: "20px", cursor: "default",
-                  animationDelay: `${i * 50}ms`,
+                  padding: "18px 16px", cursor: "default",
                   background: t.bgCard, border: `1px solid ${t.border}`,
                 }}>
-                  <div style={{ fontSize: 28, marginBottom: 10 }}>{s.icon}</div>
-                  <div style={{ fontWeight: 600, fontSize: 14, marginBottom: 4 }}>{s.name}</div>
-                  <div style={{ fontSize: 12, color: t.accent, fontFamily: "'DM Mono', monospace" }}>{s.category}</div>
+                  <div style={{ fontSize: 24, marginBottom: 8 }}>{s.icon}</div>
+                  <div style={{ fontWeight: 600, fontSize: 13, marginBottom: 4 }}>{s.name}</div>
+                  <div style={{ fontSize: 11, color: t.textMuted, fontFamily: "'DM Mono', monospace" }}>{s.category}</div>
                 </div>
               ))}
             </div>
@@ -571,33 +635,57 @@ export default function Portfolio() {
         <AnimatedSection>
           <div className="section-label"><span>//</span> educação</div>
           <h2 style={{ fontSize: "clamp(1.8rem, 3vw, 2.6rem)", fontWeight: 700, marginBottom: 48 }}>Certificação</h2>
-          <a href="https://ude.my/UC-8553c0b3-a718-4212-b176-baf5ac058f09" target="_blank" rel="noreferrer" className="card" style={{
-            display: "block", padding: "32px 36px", textDecoration: "none", color: "inherit",
-            background: `linear-gradient(135deg, ${t.bgCard}, ${t.accentBg})`,
-            borderColor: t.accentBorder, maxWidth: 600,
-          }}>
-            <div style={{ display: "flex", alignItems: "flex-start", gap: 20 }}>
-              <div style={{
-                width: 56, height: 56, borderRadius: 14, flexShrink: 0,
-                background: `linear-gradient(135deg, ${t.accent}33, ${t.accent}11)`,
-                border: `1px solid ${t.accentBorder}`,
-                display: "flex", alignItems: "center", justifyContent: "center", fontSize: 28,
-              }}>📜</div>
-              <div style={{ flex: 1 }}>
-                <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: t.accent, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 8 }}>Udemy</div>
-                <h3 style={{ fontWeight: 700, fontSize: 17, lineHeight: 1.4, marginBottom: 8 }}>
-                  Formação Completa em Java: Programação Orientada a Objetos + Projetos
-                </h3>
-                <p style={{ color: t.textMuted, fontSize: 14, marginBottom: 16 }}>Emitido em Fevereiro de 2026</p>
-                <div style={{ display: "flex", alignItems: "center", gap: 6, color: t.accent, fontSize: 13, fontWeight: 600 }}>
-                  Ver certificado
-                  <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                  </svg>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20, maxWidth: 900 }}>
+            {[
+              {
+                href: "https://ude.my/UC-8553c0b3-a718-4212-b176-baf5ac058f09",
+                platform: "Udemy",
+                title: "Formação Completa em Java: Programação Orientada a Objetos + Projetos",
+                date: "Fevereiro de 2026",
+                tags: ["Java", "POO", "Spring Boot"],
+              },
+              {
+                href: "https://www.udemy.com/certificate/UC-3b4fcf85-efef-44fe-bca5-daa8a0ee3885/",
+                platform: "Udemy",
+                title: "Testes com JUnit 5, Mockito e Spring Boot (REST APIs)",
+                date: "2026",
+                tags: ["JUnit 5", "Mockito", "Spring Boot"],
+              },
+            ].map((cert) => (
+              <a key={cert.href} href={cert.href} target="_blank" rel="noreferrer" className="card" style={{
+                display: "block", padding: "28px 32px", textDecoration: "none", color: "inherit",
+                background: `linear-gradient(135deg, ${t.bgCard}, ${t.accentBg})`,
+                borderColor: t.accentBorder,
+              }}>
+                <div style={{ display: "flex", alignItems: "flex-start", gap: 16 }}>
+                  <div style={{
+                    width: 48, height: 48, borderRadius: 12, flexShrink: 0,
+                    background: `linear-gradient(135deg, ${t.accent}33, ${t.accent}11)`,
+                    border: `1px solid ${t.accentBorder}`,
+                    display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22,
+                  }}>📜</div>
+                  <div style={{ flex: 1 }}>
+                    <div style={{ fontFamily: "'DM Mono', monospace", fontSize: 11, color: t.accent, letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 6 }}>{cert.platform}</div>
+                    <h3 style={{ fontWeight: 700, fontSize: 15, lineHeight: 1.4, marginBottom: 6 }}>{cert.title}</h3>
+                    <p style={{ color: t.textMuted, fontSize: 13, marginBottom: 12 }}>Emitido em {cert.date}</p>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 0, marginBottom: 12 }}>
+                      {cert.tags.map(tag => <span key={tag} className="tag">{tag}</span>)}
+                    </div>
+                    <div style={{ display: "flex", alignItems: "center", gap: 6, color: t.accent, fontSize: 13, fontWeight: 600 }}>
+                      Ver certificado
+                      <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </a>
+              </a>
+            ))}
+          </div>
+          <div style={{ marginTop: 24, padding: "16px 20px", borderRadius: 10, border: `1px solid ${t.borderLight}`, display: "inline-flex", alignItems: "center", gap: 10, color: t.textMuted, fontSize: 14 }}>
+            <span>🎯</span>
+            <span>Em andamento: <strong style={{ color: t.text }}>Docker para Desenvolvedores</strong> — Matheus Battisti</span>
+          </div>
         </AnimatedSection>
       </section>
 
@@ -610,6 +698,57 @@ export default function Portfolio() {
             <p style={{ color: t.textMuted, fontSize: 16, marginBottom: 48, maxWidth: 500 }}>
               Aberto a oportunidades de desenvolvimento backend Java. Vamos conversar sobre como posso contribuir com seu time!
             </p>
+            {/* Formulário de contato */}
+            <div className="card" style={{ padding: "32px", maxWidth: 560, marginBottom: 40 }}>
+              <h3 style={{ fontWeight: 600, fontSize: 16, marginBottom: 24, color: t.text }}>Envie uma mensagem</h3>
+              <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+                  <div>
+                    <label style={{ fontSize: 12, color: t.textMuted, fontFamily: "'DM Mono', monospace", textTransform: "uppercase", letterSpacing: "0.08em", display: "block", marginBottom: 6 }}>Nome</label>
+                    <input
+                      type="text" placeholder="Seu nome"
+                      style={{ width: "100%", padding: "10px 14px", borderRadius: 8, border: `1px solid ${t.border}`, background: dark ? "#0a0a0f" : "#f8fafc", color: t.text, fontSize: 14, outline: "none", transition: "border 0.2s" }}
+                      onFocus={e => e.target.style.borderColor = t.accent}
+                      onBlur={e => e.target.style.borderColor = t.border}
+                    />
+                  </div>
+                  <div>
+                    <label style={{ fontSize: 12, color: t.textMuted, fontFamily: "'DM Mono', monospace", textTransform: "uppercase", letterSpacing: "0.08em", display: "block", marginBottom: 6 }}>Email</label>
+                    <input
+                      type="email" placeholder="seu@email.com"
+                      style={{ width: "100%", padding: "10px 14px", borderRadius: 8, border: `1px solid ${t.border}`, background: dark ? "#0a0a0f" : "#f8fafc", color: t.text, fontSize: 14, outline: "none", transition: "border 0.2s" }}
+                      onFocus={e => e.target.style.borderColor = t.accent}
+                      onBlur={e => e.target.style.borderColor = t.border}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label style={{ fontSize: 12, color: t.textMuted, fontFamily: "'DM Mono', monospace", textTransform: "uppercase", letterSpacing: "0.08em", display: "block", marginBottom: 6 }}>Mensagem</label>
+                  <textarea
+                    placeholder="Sua mensagem..."
+                    rows={4}
+                    style={{ width: "100%", padding: "10px 14px", borderRadius: 8, border: `1px solid ${t.border}`, background: dark ? "#0a0a0f" : "#f8fafc", color: t.text, fontSize: 14, outline: "none", resize: "vertical", transition: "border 0.2s", fontFamily: "inherit" }}
+                    onFocus={e => e.target.style.borderColor = t.accent}
+                    onBlur={e => e.target.style.borderColor = t.border}
+                  />
+                </div>
+                <a
+                  href="mailto:endriwbento@gmail.com"
+                  className="btn-primary"
+                  style={{ alignSelf: "flex-start" }}
+                  onClick={(e) => {
+                    const name = e.currentTarget.closest("div").parentElement.querySelector("input[type=text]")?.value || "";
+                    const email = e.currentTarget.closest("div").parentElement.querySelector("input[type=email]")?.value || "";
+                    const msg = e.currentTarget.closest("div").parentElement.querySelector("textarea")?.value || "";
+                    e.currentTarget.href = `mailto:endriwbento@gmail.com?subject=Contato via portfólio - ${name}&body=${encodeURIComponent(msg)}%0A%0AEmail: ${email}`;
+                  }}
+                >
+                  <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2L15 22 11 13 2 9l20-7z"/></svg>
+                  Enviar mensagem
+                </a>
+              </div>
+            </div>
+
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16, maxWidth: 700 }}>
               {[
                 { icon: "✉️", label: "Email", value: "endriwbento@gmail.com", action: copyEmail, actionLabel: copied ? "Copiado! ✓" : "Copiar" },
